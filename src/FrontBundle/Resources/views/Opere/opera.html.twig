@@ -1,0 +1,35 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}{{ opera.nome }}{% endblock %}
+
+{% block body %}
+
+<div id="main">
+
+    <div id="reel">
+
+        <!-- Header Item -->
+
+        <div id="header" class="item" data-width="400">
+            <div class="inner">
+                <h1>{{ opera.nome }}</h1><br/>
+                <div class="tastieditdelete">
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a href="{{ path('editopera', {id: opera.id}) }}">edit</a> - 
+                        <a href="{{ path('deleteopera', {id: opera.id}) }}">delete</a>
+                    {% endif %}
+                </div>
+                <p class="dettagliopera">{{ opera.dataOpera|date('d/m/Y') }}<br>
+                {{ opera.descrizione }}</p>
+            </div>
+        </div>
+
+        <article class="item thumb" data-width="282">
+            <img src="{{ vich_uploader_asset(opera, 'imageFile') }}" alt="{{ opera.nome }}" />
+        </article>
+
+    </div>
+
+</div>
+
+{% endblock %}

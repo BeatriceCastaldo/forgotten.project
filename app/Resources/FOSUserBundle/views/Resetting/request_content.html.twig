@@ -1,0 +1,28 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<div class="container-modal">
+    <div class="modal-header modalheadermio">
+        <button type="button" class="chiudimodal close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h2 class="modal-title titolomodal" id="gridSystemModalLabel">#reimposta la tua password</h2>
+        <p class="testomodal">Inserisci l'username o la tua email!</p>
+    </div>
+    <div class="modal-body testomodal">
+        </br>
+        <form action="{{ path('fos_user_resetting_send_email') }}" method="POST" class="fos_user_resetting_request">
+            <div>
+                {% if invalid_username is defined %}
+                    <p>{{ 'resetting.request.invalid_username'|trans({'%username%': invalid_username}) }}</p>
+                {% endif %}
+                <label for="username">{{ 'resetting.request.username'|trans }}</label>
+                </br>
+                <input type="text" id="username" class="inputmio" name="username" required="required" />
+            </div>
+            </br>
+            <div>
+                <input type="submit" class="bottone" value="{{ 'resetting.request.submit'|trans }}" />
+            </div>
+        </form>
+    </div>
+</div>

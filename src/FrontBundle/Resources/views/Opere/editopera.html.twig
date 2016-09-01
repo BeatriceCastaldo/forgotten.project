@@ -1,0 +1,44 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}Modifica l'opera{% endblock %}
+
+{% block body %}
+<div id="main">
+    <div id="reel">
+
+        <!-- Header Item -->
+
+        <div id="header" class="item" data-width="400">
+            <div class="inner formmiocrea impostazioniaccountform"  style="float:left;">
+                <h1 style="margin-top:-10px;">modifica opera</h1><br/>
+                {{ form_start(form,{'attr': {'class': 'marginformeditopera'}}) }} 
+
+                {{ form_row(form.nome,{'label' : "Nome opera", 'attr': {'class': 'inputmio impostazioniutente'}}) }}
+
+                {#<!--{{ form_row(form.idArtista,{'label' : "Artista", 'attr': {'class': 'indirizzoadmin'}}) }}
+                <br/>-->#}
+
+                {{ form_row(form.imageFile,{'label' : ' ', 'attr': {'class': 'sceglifile'}}) }}
+
+            </div>
+        </div>
+
+        <article class="item thumb sfondotrasp" data-width="282">
+            <div class="formmioaccount" style="text-align:left; margin-left: 20px;">
+                <div class="inputformlabelnero">
+                    <br/>
+                    {{ form_row(form.descrizione,{'label' : "Artista", 'attr': {'class': 'inputmio'}}) }}
+                    <br/>
+                    {{ form_row(form.dataOpera,{'label' : "Data di realizzazione", 'attr': {'class': 'datareal'}}) }}
+                    <br/>
+                    {{ form_row(form.save,{'label' : "Salva", 'attr': {'class': 'bottone bottonemargintop'}}) }}
+                    </br>
+                    {{ form_end(form) }} 
+                </div>
+            </div>
+        </article>
+    </div>
+</div>
+
+
+{% endblock %}

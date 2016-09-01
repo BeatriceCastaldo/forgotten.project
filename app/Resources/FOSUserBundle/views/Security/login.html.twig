@@ -1,0 +1,42 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block body %}
+    {% block fos_user_content %}
+        {% if error %}
+        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
+
+        <div class="container-modal">
+            <div class="modal-header modalheadermio">
+              <button type="button" class="chiudimodal close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <h2 class="modal-title titolomodal" id="gridSystemModalLabel">#login</h2>
+              <p class="testomodal">Inserisci le tue informazioni personali!</p>
+            </div>
+            <div class="modal-body testomodal">
+
+                <form action="{{ path("fos_user_security_check") }}" method="post">
+                  <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+                  <br/>
+
+                  <label for="username">{{ 'security.login.username'|trans }}</label>
+                  <input type="text" id="username" class="inputmio" name="_username" value="{{ last_username }}" required="required" />
+
+                  <label for="password">{{ 'security.login.password'|trans }}</label>
+                  <input type="password" id="password" class="inputmio" name="_password" required="required" />
+
+                  <br/><br/>
+
+                  <input type="checkbox" id="remember_me" class="ricordami" name="_remember_me" value="on" />
+                  <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
+                  <br/><br/>
+
+                  <input type="submit" id="_submit" class="bottone" name="_submit" value="{{ 'security.login.submit'|trans }}" />
+                  <br/><br/>
+                </form>
+            </div>
+        </div>
+
+    {% endblock fos_user_content %}
+{%  endblock  body  %}

@@ -1,0 +1,75 @@
+{% extends "::basehome.html.twig" %}
+
+{% block title %}Forgotten Project{% endblock %}
+
+{% block ricerca_parola %}{{ termine_cercato }}{% endblock %}
+
+{% block body %}
+
+<div id="main">
+    <div id="reel">
+
+        <!-- Header Item -->
+
+        <div id="header" class="item" data-width="400">
+            <div class="inner">
+                <h1>#forgotten project</h1>
+                <p>
+                <br/>
+                </p>
+            </div>
+        </div>
+
+        <!-- Thumb Items -->
+
+        {% for opera in opere %}
+            <article class="item thumb" data-width="282">
+                <a href="{{ path('opera', {id: opera.id}) }}">
+                    <h2>{{ opera.nome }} 
+                        <div style="float: right;">{% if is_granted('ROLE_ADMIN') %}
+                            <a href="{{ path('editopera', {id: opera.id}) }}">edit</a> - 
+                            <a href="{{ path('deleteopera', {id: opera.id}) }}">delete</a>
+                            {% endif %}
+                        </div>
+                    </h2>
+                    <div class="image">
+                        <img src="{{ vich_uploader_asset(opera, 'imageFile') }}" alt="{{ opera.nome }}" />
+                    </div>
+                </a>
+            </article>
+        {% endfor %}
+
+    </div>
+</div>
+
+{% endblock %}
+
+
+{#<!--
+<div class="contenitore">
+    <input name="parola" class="termini"/>
+    <input type="submit" class="pulsante"/>
+</div>
+
+
+
+// CSS
+.contenitore .termini {
+    diplay: none;
+}
+.contenitore:hover .termini {
+    diplay: block;
+}
+
+// Javascript
+$(document).ready(function () {
+    $('.termini').hide();
+
+    $('.pulsante').on('hover', function() {
+        $('.termini').show();
+    });
+    $('.pulsante').on('mouseout', function() {
+        $('.termini').hide();
+    })
+});-->
+#}

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>{% block title %}Forgotten Project{% endblock %}</title>
+    {% block stylesheets %}{% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    <link rel="stylesheet" href="/css/mycss.css" type="text/css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css" type="text/css">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+    <link rel="stylesheet" href="/assets/css/main.css" />
+    <noscript><link rel="stylesheet" href="/assets/css/noscript.css" /></noscript>
+</head>
+<body>
+    <div id="wrapper">
+        <div id="navbar">
+            <div><a href="{{ url('home') }}" class="logo">#forgotten project</a></div>
+            <ul id="menu">
+                <li>
+                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                        <a href="{{ url('fos_user_profile_edit') }}" class="utente">{{ app.user.username }}</a> 
+                        <ul>
+                            <hr style="opacity: 0.2; margin-top: 0.3em; margin-bottom: 0.3em;">
+                            <li><a class="impostazioni" href="{{ url('fos_user_profile_edit') }}">impostazioni</a></li>
+                            <li><a class="impostazioni" href="{{ path('fos_user_security_logout') }}">logout</a></li>
+                        </ul>
+                    {% else %}
+                        <button type="button" class="" data-toggle="modal" data-target="#myModal">
+                            <a href="{{ path('fos_user_security_login') }}" class="utente">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+                        </button>
+                    {% endif %}
+                </li>
+            </ul>
+            <div><a href="#" class="contatti">contatti &nbsp &nbsp | &nbsp &nbsp </a></div>
+            <div class="formricerca">
+                <form class="navbar-form" role="search" >
+                    <div class="form-group">
+                        <input type="text" class="inputsearch" placeholder="Search" name="parola" value="{% block ricerca_parola %}{% endblock %}">
+                    </div>
+                    <button type="submit" id="htmlAdder" class="btn bottonesearch">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        {% if app.request.hasPreviousSession %}
+        {% for type, messages in app.session.flashbag.all() %}
+        {% for message in messages %}
+        <div class="flash-{{ type }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+        {% endfor %}
+        {% endif %}
+
+
+        {% block body %}
+            {%  block  fos_user_content  %} 
+            {%  endblock  fos_user_content  %}
+        {%  endblock  body  %}
+
+    </div>
+
+    <div id="footer">
+        <div class="left">
+            <ul class="copyright">
+                <li>&copy; beatrice castaldo</li>
+            </ul>
+        </div>
+        <div class="right">
+            <ul class="contact">
+                <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+                <li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+                <li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+                <li><a href="#" class="icon fa-pinterest"><span class="label">Pinterest</span></a></li>
+                <li><a href="#" class="icon fa-envelope"><span class="label">Email</span></a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/jquery.poptrox.min.js"></script>
+    <script src="/assets/js/skel.min.js"></script>
+    <script src="/assets/js/skel-viewport.min.js"></script>
+    <script src="/assets/js/util.js"></script>
+    <script src="/assets/js/main.js"></script>
+    <script type="text/javascript" src="/js/myjs.js"></script>
+    <script type="text/javascript" src="/js/jquery-2.2.3.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+
+    <!-- Modal -->
+    <div class="modal fade modalmio" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content ajax-content"></div>
+            <div class="testibottonimodal">
+                <p>non hai un account?
+                    <a href="{{ url('fos_user_registration_register') }}" data-target="#myModal1" class="linkminimodal modalutente">registrati qui</a>
+                </p>
+                <p>hai dimenticato la password?
+                    <a href="{{ url('fos_user_resetting_request') }}" data-target="#myModal1" class="linkminimodal modalutente">clicca qui</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

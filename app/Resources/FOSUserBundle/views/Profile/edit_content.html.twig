@@ -1,0 +1,86 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% if is_granted("IS_AUTHENTICATED_REMEMBERED") and not is_granted('ROLE_ADMIN') %}
+
+<div id="main">
+    <div id="reel">
+
+        <!-- Header Item -->
+
+        <div id="header" class="item" data-width="400">
+            <div class="inner">
+                <h1>{{ app.user.username }}</h1><br/>
+                <div class="formmioaccount">
+                    <div class="inputform impostazioniaccountform" style="float:left;">
+                        {{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
+
+                        {{ form_row(form.username,{'label' : "Username", 'attr': {'id': 'username', 'class': 'inputmio impostazioniutente'}}) }}
+
+                        {{ form_row(form.email,{'label' : "E-Mail", 'attr': {'id': 'mail', 'class': 'inputmio impostazioniutente'}}) }}
+
+
+                        {{ form_row(form.current_password,{'label' : "Ripeti password", 'attr': {'class': 'password inputmio impostazioniutente'}}) }}
+                    </div>
+                    <div class="bottoneform" style="float:right;">
+                        <input type="submit" class="bottonenero" value="{{ 'profile.edit.submit'|trans }}" />
+                    </div>
+
+                    {{ form_end(form) }}
+
+                </div>
+            </div>
+        </div>
+
+        <article class="item thumb" data-width="282">
+            <a href="/images/fulls/01.jpg" class="image"><img src="/images/thumbs/keith_and_julia1.jpg" alt=""></a>
+        </article>
+    </div>
+</div>
+
+{% endif %}
+
+<br/>
+
+{% if is_granted('ROLE_ADMIN') %}
+
+<div id="main">
+    <div id="reel">
+
+        <!-- Header Item -->
+
+        <div id="header" class="item" data-width="400">
+            <div class="inner">
+                <h1>{{ app.user.username }}</h1><br/>
+                <button class="bottonenero">
+                    <a href="{{ url('creaopera') }}">aggiungi opera</a>
+                </button>
+
+            </div>
+        </div>
+
+        <article class="item thumb sfondotrasp" data-width="282">
+            <div>
+                <div class="inputform">
+                    <br/>
+                    {{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
+
+                    {{ form_row(form.username,{'label' : "Username", 'attr': {'id': 'username', 'class': 'inputmio aggiungiopera'}}) }}
+
+                    {{ form_row(form.email,{'label' : "E-Mail", 'attr': {'id': 'mail', 'class': 'inputmio aggiungiopera'}}) }}
+
+                    {{ form_row(form.current_password,{'label' : "Ripeti password", 'attr': {'class': 'password inputmio aggiungiopera'}}) }}
+                </div>
+                <div class="bottoneform">
+                    <input type="submit" class="bottone" value="{{ 'profile.edit.submit'|trans }}" />
+                </div>
+
+                {{ form_end(form) }}
+
+            </div>
+        </article>
+    </div>
+</div>
+
+
+
+{% endif %}

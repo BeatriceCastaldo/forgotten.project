@@ -1,0 +1,32 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+
+<div class="container-modal">
+    <div class="modal-header modalheadermio">
+        <button type="button" class="chiudimodal close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+        </button>
+        <h2 class="modal-title titolomodal" id="gridSystemModalLabel">#registrati</h2>
+        <p class="testomodal">Inserisci le tue informazioni personali!</p>
+    </div>
+    <div class="modal-body testomodalregistrati">
+
+    <br/>
+
+    {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+
+        {{ form_row(form.username,{'label' : "Username", 'attr': {'class': 'inputmio'}}) }}
+        <br/>
+        {{ form_row(form.email,{'label' : "E-Mail", 'attr': {'class': 'inputmio'}}) }}
+        <br/>
+        {{ form_row(form.plainPassword.first,{'label' : "Password", 'attr': {'class': 'inputmio'}}) }}
+        <br/>
+        {{ form_row(form.plainPassword.second,{'label' : "Ripeti password", 'attr': {'class': 'inputmio'}}) }}
+        <br/>
+
+        <div>
+            <input type="submit" class="bottoneregistrati" value="registrati" />
+        </div>
+    {{ form_end(form) }}
+
+    </div>
+</div>

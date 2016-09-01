@@ -1,0 +1,25 @@
+home:
+    path:     /
+    defaults: { _controller: FrontBundle:Opere:elenco }
+
+opera:
+    path:     /opera/{id}
+    defaults: { _controller: FrontBundle:Opere:opera }
+    requirements: 
+        id: \d+
+
+creaopera:
+    path:     /creaopera
+    defaults: { _controller: FrontBundle:Opere:creaopera }
+
+editopera:
+    path:     /editopera/{id}
+    defaults: { _controller: FrontBundle:Opere:editopera }
+
+deleteopera:
+    path:     /deleteopera/{id}
+    defaults: { _controller: FrontBundle:Opere:deleteopera }
+
+ricerca:
+    path:     /ricerca
+    defaults: { _controller: FrontBundle:Opere:ricerca }
